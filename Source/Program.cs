@@ -3,12 +3,13 @@ using System.Windows.Forms;
 
 namespace Keysounds;
 
-static class Program
+internal static class Program
 {
     [STAThread]
-    static void Main()
+    private static void Main()
     {
         ApplicationConfiguration.Initialize();
-        Application.Run(new TaskTrayApplicationContext());
+        using TaskTrayApplicationContext context = new();
+        Application.Run(context);
     }
 }

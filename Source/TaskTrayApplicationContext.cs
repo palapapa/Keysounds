@@ -1,12 +1,10 @@
 ﻿using Keysounds.Properties;
 using System;
-using System.Diagnostics;
-using System.Drawing;
 using System.Windows.Forms;
 
 namespace Keysounds;
 
-class TaskTrayApplicationContext : ApplicationContext
+internal class TaskTrayApplicationContext : ApplicationContext
 {
     private readonly NotifyIcon notifyIcon;
 
@@ -28,5 +26,14 @@ class TaskTrayApplicationContext : ApplicationContext
     {
         notifyIcon.Dispose();
         Application.Exit();
+    }
+
+    protected override void Dispose(bool disposing)
+    {
+        base.Dispose(disposing);
+        if (disposing)
+        {
+            notifyIcon.Dispose();
+        }
     }
 }
