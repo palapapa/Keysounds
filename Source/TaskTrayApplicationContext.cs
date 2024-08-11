@@ -1,39 +1,11 @@
-﻿using Keysounds.Properties;
-using System;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Keysounds;
 
-internal class TaskTrayApplicationContext : ApplicationContext
+internal class TaskTrayApplicationContext(IAppNotifyIcon appNotifyIcon) : ApplicationContext
 {
-    private readonly NotifyIcon notifyIcon;
-
-    public TaskTrayApplicationContext()
-    {
-        notifyIcon = new()
-        {
-            Icon = Resources.NotifyIcon,
-            ContextMenuStrip = new()
-            {
-                Items = { { "Exit", Resources.Exit, Exit } }
-            },
-            Visible = true
-        };
-        Application.ApplicationExit += (_, _) => notifyIcon.Dispose();
-    }
-
-    private void Exit(object? sender, EventArgs e)
-    {
-        notifyIcon.Dispose();
-        Application.Exit();
-    }
-
-    protected override void Dispose(bool disposing)
-    {
-        base.Dispose(disposing);
-        if (disposing)
-        {
-            notifyIcon.Dispose();
-        }
-    }
+    [SuppressMessage("Performance", "CA1823:Avoid unused private fields", Justification = "This field is injected because its constructor has a side effect.")]
+    [SuppressMessage("CodeQuality", "IDE0052:Remove unread private members", Justification = "This field is injected because its constructor has a side effect.")]
+    private readonly IAppNotifyIcon appNotifyIcon = appNotifyIcon;
 }
