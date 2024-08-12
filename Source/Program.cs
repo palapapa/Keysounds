@@ -12,8 +12,8 @@ internal static class Program
     {
         ApplicationConfiguration.Initialize();
         HostApplicationBuilder builder = Host.CreateApplicationBuilder();
-        builder.Services.AddSingleton<ApplicationContext, TaskTrayApplicationContext>()
-            .AddSingleton<IAppNotifyIcon, AppNotifyIconImpl>();
+        builder.Services.AddSingleton<ApplicationContext, AppApplicationContext>()
+            .AddSingleton<IAppNotifyIcon, AppNotifyIcon>();
         using IHost host = builder.Build();
         Application.Run(host.Services.GetRequiredService<ApplicationContext>());
     }

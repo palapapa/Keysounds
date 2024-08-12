@@ -4,11 +4,14 @@ using System.Windows.Forms;
 
 namespace Keysounds;
 
-internal class AppNotifyIconImpl : IAppNotifyIcon
+/// <summary>
+/// Default implementation of <see cref="IAppNotifyIcon"/> that adds the <see cref="System.Windows.Forms.NotifyIcon"/> the user of this app is going to use to access features.
+/// </summary>
+internal class AppNotifyIcon : IAppNotifyIcon
 {
     public NotifyIcon NotifyIcon { get; private set; }
 
-    public AppNotifyIconImpl() =>
+    public AppNotifyIcon() =>
         NotifyIcon = new()
         {
             Icon = Resources.NotifyIcon,
