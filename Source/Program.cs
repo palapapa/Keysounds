@@ -23,7 +23,8 @@ internal static class Program
         }
         catch (Exception e)
         {
-            MessageBox.Show(e.ToString(), "Keysounds: Unhandled Exception!", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
+            IAppNotifyIcon notifyIcon = host.Services.GetRequiredService<IAppNotifyIcon>();
+            MessageBox.Show(notifyIcon.NotifyIcon.ContextMenuStrip, e.ToString(), "Keysounds: Unhandled Exception!", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
         }
     }
 }
